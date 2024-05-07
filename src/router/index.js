@@ -2,6 +2,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Test from '../views/Test.vue'
 import Home from '../views/Home.vue'
+import List from '../views/List.vue'
 // createRouter 创建路由实例
 const router = createRouter({
   history: createWebHashHistory(), // hash模式：createWebHashHistory，history模式：createWebHistory
@@ -18,6 +19,14 @@ const router = createRouter({
       path: '/home',
       name: 'home',
       component: Home,
+      meta: {
+        index: 1
+      }
+    },
+    {
+      path: '/list',
+      name: 'list',
+      component: List,
       meta: {
         index: 1
       }
