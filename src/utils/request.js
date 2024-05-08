@@ -5,7 +5,7 @@ import { showSuccessToast } from 'vant';
 console.log(import.meta, import.meta.env.VITE_BASE_API, import.meta.env.PROD);
 // 创建axios实例
 const instance = axios.create({
-  baseURL: '/api', // 设置默认的 API 地址，url = baseURL + url（使用proxy代理时此处可不写）
+  baseURL: '', // 设置默认的 API 地址，url = baseURL + url（使用proxy代理时此处可不写）
   timeout: 5000,						  // 设置请求超时时间
   headers: { 'systemType': 'IOS' }        // 设置请求header，可以自定义属性
 })
