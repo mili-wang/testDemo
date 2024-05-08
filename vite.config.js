@@ -61,7 +61,9 @@ export default ({ command, mode }) =>{
         "/api": {
           // target: "https://api.uomg.com",
           target: targetUrl,
-          changeOrigin: true
+          changeOrigin: true,
+          ws: false,
+          rewrite: (path) => path.replace(/^\/api/, ''),
         },
       },
     },
