@@ -66,9 +66,10 @@
 </template>
  
 <script>
+import axios from "axios"
+
 import { ref } from 'vue';
 import { showSuccessToast, showFailToast } from 'vant';
-
 import { getMessage } from '@/api/test'
 
 export default {
@@ -115,12 +116,21 @@ export default {
 
         const onLoad = () => {
           // 异步更新数据
-            getMessage().then(res => {
-              const { content } = res;
-              console.log(res, 1231232)
-              list.value.push({key: 1, value: content });
-              finished.value = true;
-            })
+            // getMessage().then(res => {
+            //   const { content } = res;
+            //   console.log(res, 1231232)
+            //   list.value.push({key: 1, value: content });
+            //   finished.value = true;
+            // })
+            axios.get('https://api.uomg.com/api/rand.qinghua')
+              .then(function (response) {
+                const { content } = response.data;
+                console.log(response, 1231232)
+                list.value.push({key: 1, value: content });
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
         };
 
         const onClickRight = () => {}
