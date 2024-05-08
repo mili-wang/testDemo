@@ -9,7 +9,7 @@ import { resolve } from 'path'
 //}
 // https://vitejs.dev/config/
 export default ({ command, mode }) =>{
-  const targetUrl = loadEnv(mode, process.cwd()).VITE_BASE_API
+  const targetUrl = loadEnv(mode, process.cwd()).VITE_BASE_API;
   return defineConfig({
     base: "./",
     plugins: [vue(),
