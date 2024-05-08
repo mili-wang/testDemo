@@ -125,8 +125,8 @@ export default {
             axios.get('https://api.uomg.com/api/rand.qinghua')
               .then(function (response) {
                 const { content } = response.data;
-                console.log(response, 1231232)
                 list.value.push({key: 1, value: content });
+                finished.value = true;
               })
               .catch(function (error) {
                 console.log(error);
