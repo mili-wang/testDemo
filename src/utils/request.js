@@ -2,10 +2,10 @@ import axios from "axios"
 import { getToken } from "./auth";
 import { showSuccessToast } from 'vant';
 
-console.log(import.meta, import.meta.env.VITE_BASE_API);
+console.log(import.meta, import.meta.env.VITE_BASE_API, import.meta.env.PROD);
 // 创建axios实例
 const instance = axios.create({
-  baseURL: '/', // 设置默认的 API 地址，url = baseURL + url（使用proxy代理时此处可不写）
+  baseURL: '', // 设置默认的 API 地址，url = baseURL + url（使用proxy代理时此处可不写）
   timeout: 5000,						  // 设置请求超时时间
   headers: { 'systemType': 'IOS' }        // 设置请求header，可以自定义属性
 })
@@ -35,13 +35,13 @@ instance.interceptors.response.use(
       // 根据后端返回的自定义状态码 code 进行错误信息提示（根据具体需求确定是否需要书写）
       switch (code) {
         case 1001:
-            showSuccessToast({ message: '登录信息已过期，请重新登录！', type: 'error' })
+            showSuccessToast('登录信息已过期，请重新登录！')
           return Promise.reject(data);
         case 1002:
-            showSuccessToast({ message: '当前账号已在其它端登录，请重试！', type: 'error' })
+            showSuccessToast('当前账号已在其它端登录，请重试！')
           return Promise.reject(data);
         case 1003:
-            showSuccessToast({ message: message || '未知错误', type: 'error' })
+            showSuccessToast(message || '未知错误')
           return Promise.reject(data);
         default:
           return data;
@@ -54,18 +54,18 @@ instance.interceptors.response.use(
       // 请求已发送，收到响应，但状态码非 2xx ，根据 http 状态码来判断响应错误信息
       const { status, data } = error.response;
       if (status === 2001) {
-        showSuccessToast({ message: '没查到对应数据！', type: 'error' })
+        showSuccessToast('没查到对应数据！')
       } else if (status === 2002) {
-        showSuccessToast({ message: '服务器开小差了！', type: 'error' })
+        showSuccessToast('服务器开小差了！')
       } else {
-        showSuccessToast({ message: data.message || '未知错误！', type: 'error' })
+        showSuccessToast(data.message || '未知错误！')
       }
     } else if (error.request) {
       // 请求已发送，未收到响应
-      showSuccessToast({ message: error.message || '请求已发送，未收到响应信息！', type: 'error' })
+      showSuccessToast(error.message || '请求已发送，未收到响应信息！')
     } else {
       // 其他错误
-      showSuccessToast({ message: error.message, type: 'error' })
+      showSuccessToast(error.message)
     }
     // 若简写，上面代码可省略，只写此一行
     return Promise.reject(error);
