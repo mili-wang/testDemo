@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { VantResolver } from "@vant/auto-import-resolver"
 import Components from "unplugin-vue-components/vite"
@@ -8,6 +8,7 @@ import { resolve } from 'path'
 //  return join(__dirname,dir)
 //}
 // https://vitejs.dev/config/
+const config = loadEnv('development', './')
 export default defineConfig({
   base: "./",
   plugins: [vue(),
@@ -58,8 +59,9 @@ export default defineConfig({
       // 选项写法
       "/api": {
         // target: "http://192.168.0.50:8083",
+        target: config.VITE_BASE_API,
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
+        // rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
   },
