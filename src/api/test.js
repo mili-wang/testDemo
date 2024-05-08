@@ -4,7 +4,7 @@ import request from '@/utils/request';
 export function getMessage(params = {}) {
   return request({
     url: '/api/rand.qinghua',
-    method: 'POST',
+    method: 'GET',
     data: params
   })
 }
